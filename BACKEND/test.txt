@@ -1,0 +1,8 @@
+//Backend Flow
+
+Schema => //Plan to store data in database, schema 
+Model => //Makes a model/storage for the data from schema to be put in
+Controller => //Logic 
+Routes => //which controller to use
+index.js
+// schema exports, model imports
