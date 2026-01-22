@@ -59,7 +59,7 @@ export const verifyUser = async (req, res) => {
       {
         isVerified: true,
       },
-      { new: true }
+      { new: true },
     );
 
     res.status(200).json({
@@ -162,7 +162,7 @@ export const loginUserController = async (req, res) => {
       payload: {
         id: isValidEmail.id,
       },
-      expiryTime: "60s",
+      expiryTime: "30d",
     });
 
     res.status(200).json({

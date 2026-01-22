@@ -3,8 +3,7 @@ import { Product } from "../schema/product.schema.js";
 export const createProductController = async (req, res) => {
   try {
     let data = req.body;
-    const id = req.userID;
-    console.log(id);
+    console.log(data);
     const result = await Product.create(data);
     res.status(201).json({
       message: "Product registered successfully",

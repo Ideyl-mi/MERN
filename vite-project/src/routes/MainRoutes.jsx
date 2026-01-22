@@ -2,6 +2,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import About from "../components/About";
+import Courses from "../components/Courses";
+import Products from "../components/Products";
+import Store from "../components/Store";
 
 const MainRoutes = () => {
   return (
@@ -9,15 +12,13 @@ const MainRoutes = () => {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<div>Hello from home routes</div>}></Route>
-        <Route path="/about" element={<About></About>}></Route>
         <Route
-          path="/products"
-          element={<div>Hello from product section</div>}
+          path="/about"
+          element={<About CourseName="MERN STACK" price="15,000"></About>}
         ></Route>
-        <Route
-          path="/courses"
-          element={<div>This is the courses section</div>}
-        ></Route>
+        <Route path="/products" element={<Products></Products>}></Route>
+        <Route path="/courses" element={<Courses></Courses>}></Route>
+        <Route path="/store" element={<Store></Store>}></Route>
       </Routes>
     </div>
   );
