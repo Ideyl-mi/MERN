@@ -15,7 +15,7 @@ export const productRouter = Router();
 productRouter.post(
   "/create",
   isAuthenticated,
-  isAuthorized,
+  isAuthorized(["admin", "driver"]),
   createProductController,
 );
 productRouter.get("/get", getAllProductController);
