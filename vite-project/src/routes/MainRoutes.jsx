@@ -8,6 +8,8 @@ import Store from "../components/Store";
 import UseStatePractice from "../components/UseStatePractice";
 import UseStatePractice2 from "../components/UseStatePractice2";
 import UseStatePractice3 from "../components/UseStatePractice3";
+import NotfoundPage from "../components/NotfoundPage";
+import UseEffectPractice from "../components/UseEffectPractice";
 
 const MainRoutes = () => {
   return (
@@ -33,6 +35,11 @@ const MainRoutes = () => {
         <Route
           path="/UseStatePractice3"
           element={<UseStatePractice3></UseStatePractice3>}
+        ></Route>
+        <Route path="*" element={<NotfoundPage />}></Route>
+        <Route
+          path="useeffect"
+          element={<UseEffectPractice></UseEffectPractice>}
         ></Route>
       </Routes>
     </div>
