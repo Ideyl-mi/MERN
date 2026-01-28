@@ -1,9 +1,11 @@
 import React from "react";
 
-const About = (props) => {
+const About = () => {
   return (
     <div>
-      {props.price} is the price of {props.CourseName} course{" "}
+      We at this logo less and nameless company intend to build the company from
+      the ground up and in front of everyone to show them the process of
+      starting a company website
     </div>
   );
 };

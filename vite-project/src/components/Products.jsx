@@ -1,7 +1,11 @@
 import React from "react";
 
-const Products = () => {
-  return <div>This is the products component</div>;
+const Products = (props) => {
+  return (
+    <div>
+      {props.price} is the price of {props.CourseName} course{" "}
+    </div>
+  );
 };
 
 export default Products;

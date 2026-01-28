@@ -1,10 +1,13 @@
 .header {
+  background-color: turquoise;
   display: flex;
   align-items: center;
   justify-items: center;
   gap: 100px;
 }
 .items {
+  background-color: thistle;
+  text-decoration-color: brown;
   display: flex;
   align-items: center;
   justify-items: center;
