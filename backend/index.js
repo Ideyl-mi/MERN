@@ -4,9 +4,12 @@ import { userRouter } from "./routes/user.route.js";
 import { productRouter } from "./routes/product.route.js";
 import { orderRouter } from "./routes/order.route.js";
 import cors from "cors";
+import { fileRouter } from "./routes/file.route.js";
 
 const app = express();
 app.use(express.json());
+app.use(cors("http://localhost:5173"));
+app.use(express.static("./upload"));
 
 const PORT = 7888;
 
@@ -19,5 +22,4 @@ app.listen(PORT, () => {
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/order", orderRouter);
-
-app.use(cors("http://localhost:5173"));
+app.use("/file", fileRouter);

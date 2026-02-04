@@ -6,9 +6,11 @@ import {
   getSpecificUserController,
   loginUserController,
   registerUserController,
+  resetPassword,
   updateUserController,
   verifyUser,
 } from "../controller/user.controller.js";
+import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
 export const userRouter = Router();
 
@@ -17,6 +19,7 @@ userRouter.get("/verify", verifyUser);
 userRouter.get("/get", getAllUserController);
 userRouter.post("/login", loginUserController);
 userRouter.get("/get/:id", getSpecificUserController);
-userRouter.patch("/update/:id", updateUserController);
-userRouter.delete("/delete/:id", deleteUserController);
+userRouter.patch("/update", isAuthenticated, updateUserController);
+userRouter.delete("/delete/:id", isAuthenticated, deleteUserController);
 userRouter.get("/forgot-password", forgotPassword);
+userRouter.patch("/reset-password", resetPassword);

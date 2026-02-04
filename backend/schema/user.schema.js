@@ -23,8 +23,8 @@ const userSchema = new mongoose.Schema({
   },
   phonenumber: {
     type: Number,
-    required: [true, "Phone no. must be sent"],
-    unique: [true, "Phone no. already used"],
+    required: false,
+    unique: false,
   },
   isVerified: {
     type: Boolean,
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
   },
   address: {
     type: String,
-    required: [true, "Address must be sent"],
+    required: false,
     unique: false,
   },
   role: {

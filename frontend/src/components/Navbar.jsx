@@ -5,13 +5,17 @@ import "../../src/App.css";
 const Navbar = () => {
   return (
     <div className="header">
-      <h1>logo</h1>
+      <h1>Logo</h1>
       <nav className="navbar">
         <NavLink to={"/"}>Home</NavLink>
         <NavLink to={"/about"}>About us</NavLink>
         <NavLink to={"/products"}>Products</NavLink>
         <NavLink to={"/shop"}>Shop</NavLink>
         <NavLink to={"/register"}>Register</NavLink>
+        <NavLink to={"/login"}>Login</NavLink>
+        <NavLink to={"/forgot-password"}></NavLink>
+        <NavLink to={"/reset-password"}></NavLink>
+        <NavLink to={"/dashboard"}>Dashboard</NavLink>
       </nav>
     </div>
   );

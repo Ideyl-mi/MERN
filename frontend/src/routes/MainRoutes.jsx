@@ -6,6 +6,11 @@ import Shop from "../components/Shop";
 import Navbar from "../components/Navbar";
 import Register from "../components/Register";
 import Products from "../components/Products";
+import Login from "../components/Login";
+import Dashboard from "../components/Dashboard";
+import ForgotPassword from "../components/ForgotPassword";
+import ResetPassword from "../components/ResetPassword";
+import UpdateProfile from "../components/UpdateProfile";
 
 const MainRoutes = () => {
   return (
@@ -18,6 +23,17 @@ const MainRoutes = () => {
           <Route path="/shop" element={<Shop />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/products" element={<Products></Products>}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+          <Route
+            path="/user/reset-password"
+            element={<ResetPassword />}
+          ></Route>
+          <Route path="/dashboard" element={<Outlet />}>
+            <Route index element={<Dashboard />}></Route>
+
+            <Route path="update-profile" element={<UpdateProfile />}></Route>
+          </Route>
         </Route>
       </Routes>
     </div>

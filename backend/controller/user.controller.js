@@ -200,7 +200,7 @@ export const forgotPassword = async (req, res) => {
       html: ` 
       </br>
       <p>Reset password link</p>
-      <a href=http://localhost:7888/user/forgot-password?token=${token}>
+      <a href=http://localhost:5173/user/forgot-password?token=${token}>
       <button style="border: none; background-color: blue; color: white; padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left:10px;">Verify</button>
       </a>
       `,
@@ -223,6 +223,31 @@ export const forgotPassword = async (req, res) => {
 // hint : req.query.token  , req.body.password , id = token.id , findByIdAndUpdate - hashPassword and update
 export const resetPassword = async (req, res) => {
   try {
+    const token = req.query.token; // ?token=eyjsfewgr.....
+    const verifiedToken = await verifyToken(token);
+    console.log(verifiedToken);
+
+    const id = verifiedToken.id;
+
+    const hashedPassword = await hashPassword(req.body.password);
+
+    if (verifiedToken.reason !== "Reset Password") {
+      res.status(401).json({
+        message: "Invalid Token",
+      });
+    } else {
+      const result = await User.findByIdAndUpdate(
+        id,
+        { password: hashedPassword },
+        { new: true },
+      );
+
+      res.status(200).json({
+        success: true,
+        message: "Password Reset Successfull",
+        data: result,
+      });
+    }
   } catch (error) {
     res.status(500).json({
       message: "Internal Server Error",
