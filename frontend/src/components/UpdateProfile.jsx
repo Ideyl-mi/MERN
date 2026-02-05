@@ -3,22 +3,22 @@ import React, { useState } from "react";
 
 const UpdateProfile = () => {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [userName, setUserName] = useState("");
 
   const [error, setError] = useState("");
 
   const handleUpdateProfile = async (e) => {
-    e.prevenDefault();
+    e.preventDefault();
 
     const token = localStorage.getItem("token");
     console.log(token);
 
     try {
       const response = await axios.patch(
-        "http://localhost:7888/user/update",
+        "http://localhost:7888/user/update-user",
         {
           email: email,
-          username: username,
+          username: userName,
         },
         {
           headers: {
@@ -29,16 +29,25 @@ const UpdateProfile = () => {
 
       setError(response.data.message);
 
-      console.log(response);
-      alert("Profile Updated Successfully");
+      console.log(response.data);
+      alert(response.data.message);
     } catch (error) {
       console.log(error.message);
     }
   };
   return (
     <div>
-      <h1>UpdateProfile</h1>
+      <h1>Update Profile </h1>
       <form onSubmit={handleUpdateProfile}>
+        <input
+          type="text"
+          value={userName}
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+          placeholder="Enter your username"
+        />
+
         <input
           type="email"
           value={email}
@@ -47,19 +56,15 @@ const UpdateProfile = () => {
           }}
           placeholder="Enter your email"
         />
-        <input
-          type="username"
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-          placeholder="Enter your username"
-        />
+
         <button type="submit">Update Profile</button>
       </form>
-      <h5>
-        Your new username is {username} and your updated email is {email}
-      </h5>
+
+      <p>
+        Your new username is{" "}
+        <span style={{ fontWeight: "bold" }}> {userName}</span> and your updated
+        email is <span style={{ fontWeight: "bold" }}>{email}</span>
+      </p>
     </div>
   );
 };
