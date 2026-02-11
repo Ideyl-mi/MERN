@@ -21,5 +21,5 @@ userRouter.post("/login", loginUserController);
 userRouter.get("/get/:id", getSpecificUserController);
 userRouter.patch("/update", isAuthenticated, updateUserController);
 userRouter.delete("/delete/:id", isAuthenticated, deleteUserController);
-userRouter.get("/forgot-password", forgotPassword);
+userRouter.post("/forgot-password", forgotPassword);
 userRouter.patch("/reset-password", resetPassword);

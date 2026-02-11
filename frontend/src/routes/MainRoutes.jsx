@@ -1,16 +1,19 @@
-import React from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
-import Home from "../components/Home";
-import About from "../components/About";
-import Shop from "../components/Shop";
-import Navbar from "../components/Navbar";
-import Register from "../components/Register";
-import Products from "../components/Products";
-import Login from "../components/Login";
-import Dashboard from "../components/Dashboard";
-import ForgotPassword from "../components/ForgotPassword";
-import ResetPassword from "../components/ResetPassword";
-import UpdateProfile from "../components/UpdateProfile";
+import About from "../components/users/About";
+import Dashboard from "../components/dashboard/Dashboard";
+import ForgotPassword from "../components/auth/ForgotPassword";
+import Home from "../components/users/Home";
+import Login from "../components/auth/Login";
+import Navbar from "../components/users/Navbar";
+import ProductCreate from "../components/dashboard/ProductCreate";
+import Register from "../components/auth/Register";
+import ResetPassword from "../components/auth/ResetPassword";
+import UpdateProfile from "../components/dashboard/UpdateProfile";
+import Store from "../components/users/Store";
+import Order from "../components/users/Order";
+import Products from "../components/users/Products";
+import MyProducts from "../components/dashboard/MyProducts";
+import UpdateProduct from "../components/dashboard/UpdateProduct";
 
 const MainRoutes = () => {
   return (
@@ -20,19 +23,28 @@ const MainRoutes = () => {
         <Route path="/" element={<Outlet />}>
           <Route index element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
-          <Route path="/shop" element={<Shop />}></Route>
+          <Route path="/products" element={<Products />}></Route>
+          <Route path="/store" element={<Store />}></Route>
+          <Route path="/order/:id/:price" element={<Order />}></Route>
+
           <Route path="/register" element={<Register />}></Route>
-          <Route path="/products" element={<Products></Products>}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route
             path="/user/reset-password"
             element={<ResetPassword />}
           ></Route>
+
           <Route path="/dashboard" element={<Outlet />}>
             <Route index element={<Dashboard />}></Route>
 
             <Route path="update-profile" element={<UpdateProfile />}></Route>
+            <Route path="create-product" element={<ProductCreate />}></Route>
+            <Route path="my-products" element={<MyProducts />}></Route>
+            <Route
+              path="update-product/:id"
+              element={<UpdateProduct />}
+            ></Route>
           </Route>
         </Route>
       </Routes>

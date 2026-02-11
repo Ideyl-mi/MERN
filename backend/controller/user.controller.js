@@ -68,8 +68,7 @@ export const verifyUser = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: "Internal Server Error",
-      error: error.message,
+      err: error.message,
     });
   }
 };
@@ -138,22 +137,26 @@ export const deleteUserController = async (req, res) => {
 export const loginUserController = async (req, res) => {
   try {
     const isValidEmail = await User.findOne({ email: req.body.email });
+
     if (!isValidEmail) {
-      res.status(400).json({
+      res.status(404).json({
         message: "Invalid Credential",
       });
     }
+
     if (!isValidEmail.isVerified) {
       res.status(404).json({
         message: "Please verify your account first",
       });
     }
+
     const isValidPassword = await verifyPassword({
       hashedPassword: isValidEmail.password,
       plainPassword: req.body.password,
     });
+
     if (!isValidPassword) {
-      res.status(400).json({
+      res.status(404).json({
         message: "Invalid Credential",
       });
     }
@@ -166,7 +169,7 @@ export const loginUserController = async (req, res) => {
     });
 
     res.status(200).json({
-      message: "User logged In successfully",
+      message: "Login Successfull",
       data: isValidEmail,
       token: token,
     });
@@ -180,6 +183,7 @@ export const loginUserController = async (req, res) => {
 export const forgotPassword = async (req, res) => {
   try {
     let email = req.body.email;
+
     const isValidEmail = await User.findOne({ email: email });
 
     if (!isValidEmail) {
@@ -187,26 +191,24 @@ export const forgotPassword = async (req, res) => {
         message: "Account with this email does not exist",
       });
     }
+
     const token = await generateToken({
       payload: {
-        email: isValidEmail.email,
-        id: isValidEmail._id,
+        id: isValidEmail.id,
+        reason: "Reset Password",
       },
       expiryTime: "1h",
     });
+
     const result = await sendMail({
-      email: req.body.email,
+      email: email,
       subject: "Password reset link",
-      html: ` 
-      </br>
-      <p>Reset password link</p>
-      <a href=http://localhost:5173/user/forgot-password?token=${token}>
-      <button style="border: none; background-color: blue; color: white; padding-top: 5px; padding-bottom: 5px; padding-right: 10px; padding-left:10px;">Verify</button>
-      </a>
-      `,
+      html: `<p>You requested for a password reset</p> </br> <a href=http://localhost:5173/user/reset-password?token=${token}>
+      http://localhost:5173/user/reset-password?token=${token}</a>`,
     });
+
     res.status(200).json({
-      message: "Password reset link has been sent to the user",
+      message: "Password reset link sent to user",
       data: result,
     });
   } catch (error) {
@@ -229,7 +231,7 @@ export const resetPassword = async (req, res) => {
 
     const id = verifiedToken.id;
 
-    const hashedPassword = await hashPassword(req.body.password);
+    const hashedPassword = await hashedPassword(req.body.password);
 
     if (verifiedToken.reason !== "Reset Password") {
       res.status(401).json({

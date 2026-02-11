@@ -1,9 +1,16 @@
-export const handleSingleFile = (req, res, next) => {
+export const handleSingleFile = async (req, res) => {
   try {
-    const file = req.file;
+    if (!req.file) {
+      return res.status(400).json({
+        message: "No file uploaded",
+      });
+    }
+
+    const file = req.file.filename;
+
     res.status(200).json({
-      message: "File uploaded sucessfully",
-      link: `http://localhost:7888/${file.filename}`,
+      message: "File Uploaded Successfully",
+      url: `http://localhost:7888/${file}`,
     });
   } catch (error) {
     res.status(500).json({

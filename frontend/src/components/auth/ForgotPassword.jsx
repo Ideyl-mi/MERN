@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +12,8 @@ const ForgotPassword = () => {
           email: email,
         },
       );
-      console.log(response);
+
+      console.log(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -21,15 +22,15 @@ const ForgotPassword = () => {
     <div>
       <form onSubmit={handleForgotPassword}>
         <input
-          type="email"
+          type="text"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-          placeholder="Enter your email"
+          required
+          placeholder="enter your email"
         />
-
-        <button type="submit">Send password reset link</button>
+        <button type="submit">send reset link</button>
       </form>
     </div>
   );
