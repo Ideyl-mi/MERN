@@ -4,4 +4,4 @@ import { upload } from "../utils/multer.js";
 
 export const fileRouter = Router();
 
-fileRouter.post("/single", upload.single("document"), handleSingleFile);
+fileRouter.post("/upload", upload.single("document"), handleSingleFile);

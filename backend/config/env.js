@@ -5,3 +5,4 @@ export const MONGODB_URL = process.env.MONGODB_URL;
 export const SECRET_KEY = process.env.SECRET_KEY;
 export const SMPT_EMAIL = process.env.SMPT_EMAIL;
 export const SMPT_PASS = process.env.SMPT_PASS;
+export const FRONTEND_URL = process.env.FRONTEND_URL;

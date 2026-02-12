@@ -3,11 +3,11 @@ import { Product } from "../schema/product.schema.js";
 export const createProductController = async (req, res) => {
   try {
     let data = req.body;
-    console.log(data);
+
     const result = await Product.create(data);
     res.status(201).json({
       message: "Product registered successfully",
-      result: result,
+      data: result,
     });
   } catch (error) {
     res.status(500).json({
@@ -54,10 +54,14 @@ export const updateProductController = async (req, res) => {
   try {
     let id = req.params.id;
     let data = req.body;
-    const result = await Product.findByIdAndUpdate(id, data, { new: true });
-
+    //let quantity = data.quantity
+    const result = await Product.findByIdAndUpdate(
+      id,
+      { ...data },
+      { new: true },
+    );
     res.status(200).json({
-      message: "Product found successfuly",
+      message: "Product Updated Successfully",
       data: result,
     });
   } catch (error) {
@@ -72,7 +76,7 @@ export const deleteProductController = async (req, res) => {
     let id = req.params.id;
     const result = await Product.findByIdAndDelete(id);
     res.status(200).json({
-      message: "Product deleted successfully",
+      message: "Product Deleted Successfullt",
       data: result,
     });
   } catch (error) {
