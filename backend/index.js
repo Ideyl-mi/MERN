@@ -24,7 +24,7 @@ const app = express();
 // CORS configuration - MUST be before routes
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://mern-zx7p.vercel.app",
     credentials: true,
   }),
 );
